@@ -3,6 +3,20 @@
 My IS 601 Module 7 Docker project. The app generates a timestamped PNG for a URL,
 prints a log message, and exits. It runs as a non-root user inside the container.
 
+## Submission
+
+- [DockerHub image](https://hub.docker.com/r/tkg1121/qr-code-generator-app)
+- [Successful test and image build](https://github.com/tkg1121/qr-code-generator/actions/runs/39527047973)
+- [Reflection and screenshots](docs/Module%207%20Submission.pdf)
+- [Container logs screenshot](docs/Container%20Logs.png)
+- [GitHub Actions screenshot](docs/GitHub%20Actions.jpg)
+
+Pull and run the published image:
+
+```bash
+docker run --rm tkg1121/qr-code-generator-app:latest --url https://www.njit.edu
+```
+
 ## Source
 
 `main.py` is the instructor's provided application, copied unchanged from
@@ -136,9 +150,10 @@ Sign in to DockerHub using your own account, then tag and push the tested image:
 
 ```bash
 docker login
-docker tag qr-code-generator-app YOUR_DOCKERHUB_USERNAME/qr-code-generator-app:latest
-docker push YOUR_DOCKERHUB_USERNAME/qr-code-generator-app:latest
+docker tag qr-code-generator-app tkg1121/qr-code-generator-app:latest
+docker push tkg1121/qr-code-generator-app:latest
 ```
 
-The image page will be `https://hub.docker.com/r/YOUR_DOCKERHUB_USERNAME/qr-code-generator-app`
-after a successful push. Do not put passwords or access tokens in this repository.
+The published image page is
+[tkg1121/qr-code-generator-app](https://hub.docker.com/r/tkg1121/qr-code-generator-app).
+Do not put passwords or access tokens in this repository.
