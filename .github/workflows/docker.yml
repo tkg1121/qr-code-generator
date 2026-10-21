@@ -1,0 +1,32 @@
+name: Test and build Docker image
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Install test dependencies
+        run: python -m pip install -r requirements-dev.txt
+      - name: Run automated tests
+        run: python -m pytest -v
+      - name: Build Docker image
+        run: docker build --tag qr-code-generator-app .
+      - name: Run container and verify logs and mounted QR output
+        run: python tests/verify_container.py qr-code-generator-app
+      - name: Export tested image
+        run: docker save qr-code-generator-app | gzip > qr-code-generator-app.tar.gz
+      - name: Upload tested image and QR output
+        uses: actions/upload-artifact@v7
+        with:
+          name: tested-docker-image
+          path: |
+            qr-code-generator-app.tar.gz
+            container-output/
+          retention-days: 7

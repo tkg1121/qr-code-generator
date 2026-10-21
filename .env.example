@@ -1,0 +1,3 @@
+QR_CODE_DIR=qr_codes
+FILL_COLOR=red
+BACK_COLOR=white
